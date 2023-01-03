@@ -1,0 +1,62 @@
+---
+- name: Play1
+  hosts: proxmox_routers
+  connection: network_cli
+  tasks: 
+    - name: Play1_1 Gather all Legacy facts
+      cisco.ios.ios_facts:
+        gather_subset: 
+        - config 
+      register: result
+    
+    - name: Play1_2 Create new  directory
+      file:
+        path: "/home/ansible/backups/{{ansible_net_model}}"
+        state: directory
+      run_once: true        
+
+
+- name: Play2 Show run 
+  hosts: proxmox_routers
+  connection: network_cli
+  tasks:
+    - name: show run 
+      ios_command:
+        commands:
+          - show run
+      register: config 
+    
+    - name: Task 2_1 Create new host directory
+      file:
+        path: "/home/ansible/backups/{{ansible_net_model}}/{{ ansible_net_hostname }}"
+        state: directory
+      run_once: false  
+
+    
+    - name: Task 2_2 Save output
+      copy: 
+        content: "{{ config.stdout[0] }}"
+        dest: "/home/ansible/backups/{{ansible_net_model}}/{{ ansible_net_hostname }}/running_cfg.txt"
+        
+
+- name: Play3 Show start 
+  hosts: proxmox_routers
+  connection: network_cli
+  tasks:
+    - name: show start 
+      ios_command:
+        commands:
+          - show start
+      register: config_start 
+    
+    - name: Task 3_1  Create new host directory
+      file:
+        path: "/home/ansible/backups/{{ansible_net_model}}/{{ ansible_net_hostname }}"
+        state: directory
+      run_once: false  
+
+    
+    - name: Tasks 3_2 Save output 
+      copy: 
+        content: "{{ config_start.stdout[0] }}"
+        dest: "/home/ansible/backups/{{ansible_net_model}}/{{ ansible_net_hostname }}/startup_cfg.txt"
