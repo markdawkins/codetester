@@ -1,0 +1,15 @@
+---
+- name: Issue show commands to find up time
+  hosts: all
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Show ver inc uptime 
+      ios_command:
+        commands:
+          - show ver | inc uptime |reload reason
+      register: if_data
+
+    - name: Interfaces output
+      debug:
+        var: if_data['stdout_lines'][0]
