@@ -1,0 +1,14 @@
+---
+- name: Gather IOS-XE facts
+  hosts: proxmox_routers
+  connection: network_cli 
+  tasks:
+    - name: Gather all legacy facts
+      cisco.ios.ios_facts:
+        gather_subset: all
+      register: result
+
+    - name: Print Result 
+      debug:
+        msg: "{{ result }}"
+

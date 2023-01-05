@@ -1,0 +1,15 @@
+---
+- name: Gather IOS-XE facts
+  hosts: proxmox_routers
+  connection: network_cli 
+  tasks:
+    - name:  show ip int brief
+      ios_command:
+        commands:
+          - show ip int brief
+
+      register: if_data
+
+    - name: Interfaces output
+      debug:
+        var: if_data['stdout_lines'][0] 
