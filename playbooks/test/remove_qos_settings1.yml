@@ -1,0 +1,19 @@
+---
+- name: Remove QOS settings 
+  hosts: all
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: check for 48 ports
+      ios_command:
+        commands: show run | inc interface | srr-queue | priority-queue | srr-queue 
+      register: config_output   
+  
+    - name: Remove quos settings for a specific port
+      ios_config:
+        lines:
+        - no srr-queue bandwidth share 
+        - no queue-set 2
+        - no priority-queue out
+        parents: interface range gigabit 1/0/1 - 48
+      when: config_output is search("priority-queue out")
