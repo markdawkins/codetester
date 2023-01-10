@@ -11,9 +11,15 @@
      yum: name = vsftpd state ="latest"
      when: ansible_os_family == "RedHat"
      
-   - name: install stuff
+   - name: Install stuff
      apt:  name={{ item }} update_cache=yes state=latest
      with_items:
        - vim
        - nano 
        - apache2
+    - name: Install stuff
+      yum:  name={{ item }} update_cache=yes state=latest
+      with_items:
+       - vim
+       - nano 
+       - apache2     
