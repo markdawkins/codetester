@@ -1,0 +1,13 @@
+---
+- hosts: linux_servers
+  become: yes
+  
+  tasks:
+    -name: Install vsftpd 
+     apt: name = vsftpd state = "latest"
+     when: ansible_os_family = ="debian" 
+     
+   - name: Install vsftpd
+     yum: name = vsftpd state ="latest"
+     when: ansible_os_family == "RedHat"
+     
