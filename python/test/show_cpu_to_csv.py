@@ -2,17 +2,20 @@ import csv
 from getpass import getpass
 from netmiko import ConnectHandler
 
+# List of cisco switch IP addresses
 LIST = input("Enter List Name:")
-#ip_list = "\LISTS\%s.txt"  % LIST
+listname  = "./LISTS/%s.txt"  % LIST
 
-# List of Cisco switch IP addresses
-ip_list = ["10.12.95.245", "10.12.95.247", "10.12.95.246"]
+# Username and password to login to cisco switches
+
 username = input("Enter Username: ")
 password = getpass("Enter password: ")
 
+#Output report name 
+
 REPORT = input("Enter Report Name:")
 # CSV file to write results to
-output_file = "\REPORTS\CPU_REPORTS\%s.csv" % REPORT
+output_file = "./REPORTS/CPU_REPORTS/%s.csv" % REPORT
 
 # CSV header row
 header = ["IP Address", "CPU Utilization"]
@@ -21,16 +24,17 @@ header = ["IP Address", "CPU Utilization"]
 with open(output_file, "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(header)
-
+                       
+    f = open (listname)
     # Connect to each switch and run command
-    for ip in ip_list:
+    for ip in f:
         device = ip.strip()
         device = {
             "device_type": "cisco_ios",
-            "ip": ip,
-            "username": "svc_ansible",
+            "ip":device,
+            "username": username,
             "password":password,
-            
+
         }
         try:
             net_connect = ConnectHandler(**device)
