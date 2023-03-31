@@ -4,12 +4,12 @@ import time
 # Define the access point's IP address, username, and password
 ap_ip = '10.62.95.165'
 ap_username = 'admin'
-ap_password = 'afjlrty1463rm3m'
+ap_password = 'password'
 
 # Define the command to execute
-command = 'archive download-sw /no-reload sftp://192.168.2.167/ap1g7'
-command2 = 'username:apdl'
-command3 = 'password:gEQAAp3C'
+command = 'archive download-sw /no-reload sftp://192.168.2.174/ap1g7'
+command2 = 'username:username'
+command3 = 'password:password'
 
 
 # Connect to the access point
