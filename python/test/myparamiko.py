@@ -1,5 +1,6 @@
 import paramiko
 import time
+from getpass import getpass
 
 def connect(server_ip, server_port, user, passwd):
     ssh_client = paramiko.SSHClient()
@@ -28,7 +29,7 @@ def close(ssh_client):
         ssh_client.close()
 
 if __name__ == '__main__':
-    router1 = {'server_ip': '192.168.1.158', 'server_port': '22', 'user':'ansible', 'passwd':'go'}
+    router1 = {'server_ip': '192.168.1.158', 'server_port': '22', 'user':'admin', 'passwd':passwd}
     client = connect(**router1)
     shell = get_shell(client)
 
