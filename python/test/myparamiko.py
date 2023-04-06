@@ -33,10 +33,10 @@ if __name__ == '__main__':
     shell = get_shell(client)
 
     send_command(shell, 'enable')
-    send_command(shell, 'enable_password_goes_here') # this is the enable password
+    send_command(shell, 'cisco') # this is the enable password
     send_command(shell, 'term len 0')
-    send_command(shell, 'show version')
-    send_command(shell, 'show wired 0')
+    send_command(shell, 'sh version')
+    send_command(shell, 'sh ip int brief')
 
     output = show(shell)
     print(output)
