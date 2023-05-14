@@ -3,7 +3,7 @@
 
 ip sla 1  
  icmp-echo 172.17.6.1
- frequency 10
+ frequency 30
 ip sla schedule 1 life forever start-time now
 
 track 1 ip sla 1 reachability
