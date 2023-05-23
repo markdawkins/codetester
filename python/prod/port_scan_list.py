@@ -1,8 +1,9 @@
 import nmap
+port_number = input('enter port number: ')
 
 def port_scan(ip):
     nm = nmap.PortScanner()
-    nm.scan(ip, '4876', arguments='-Pn')
+    nm.scan(ip, port_number, arguments='-Pn')
     return nm[ip]['tcp'][4876]['state']
 
 def main():
