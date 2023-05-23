@@ -1,13 +1,17 @@
+
+####Still work to be done on this script. Need to change input port 4876 to be a variable so that it does not have to be manually 
+##changed in script code.
 import nmap
-port_number = input('enter port number: ')
+#port_number = input('enter port number: ')
 
 def port_scan(ip):
     nm = nmap.PortScanner()
-    nm.scan(ip, port_number, arguments='-Pn')
+    #nm.scan(ip, port_number, arguments='-Pn')
+    nm.scan(ip, '4876', arguments='-Pn')
     return nm[ip]['tcp'][4876]['state']
 
 def main():
-    ip_file = './LISTS/vstack_2.txt'  # Replace with the path to your IP addresses text file
+    ip_file = './LISTS/'+ filename + '.txt'  # Replace with the path to your IP addresses text file
 
     with open(ip_file, 'r') as file:
         ip_list = file.read().splitlines()
