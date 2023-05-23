@@ -7,8 +7,8 @@ import nmap
 def port_scan(ip):
     nm = nmap.PortScanner()
     #nm.scan(ip, port_number, arguments='-Pn')
-    nm.scan(ip, '4876', arguments='-Pn')
-    return nm[ip]['tcp'][4876]['state']
+    nm.scan(ip, '4876', arguments='-Pn')      ###Change the port number to scanned here in this exampe we are using tcp port 4876
+    return nm[ip]['tcp'][4876]['state']         ###Change the port number to scanned here in this exampe we are using tcp port 4876
 
 def main():
     ip_file = './LISTS/'+ filename + '.txt'  # Replace with the path to your IP addresses text file
